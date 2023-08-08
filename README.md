@@ -15,7 +15,7 @@ In:
 {"foo" => "bar", "baz" => [{"a" => 1}, {"a" => 2}, {"b" => 3}]}
 Out:
 {"foo"=>"bar", "baz"=>{"baz_0"=> {"a" => 1} , "baz_1"=> {"a" => 2}, "baz_2"=>{"b"=>3}}}
-
+```
 ```
 <filter test**>
     @type                 record_indexing
@@ -28,6 +28,7 @@ In:
 Out:
 {"foo"=>"bar", "baz"=>{"0"=> {"a" => 1} , "1"=>{"a" => 2}, "2"=>{"b"=>3}},  "daz" => [{"a"=>1}, {"a"=>2}, {"b"=>3}]}
 
+```
 ```
 <filter test**>
     @type                 record_indexing
