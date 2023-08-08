@@ -3,14 +3,14 @@
 [Fluentd](https://fluentd.org/) Filter plugin to spin entry with an array field into multiple entries.
 
 ## Examples
-
+```
 <filter test**>
     @type                 record_indexing
     check_all_key         false
     key_name              baz
     key_prefix            baz_0
 </filter>
-
+```
 In:
 ```json
 {"foo" => "bar", "baz" => [{"a" => 1}, {"a" => 2}, {"b" => 3}]}
@@ -19,12 +19,13 @@ Out:
 ```json
 {"foo"=>"bar", "baz"=>{"baz_0"=> {"a" => 1} , "baz_1"=> {"a" => 2}, "baz_2"=>{"b"=>3}}}
 ```
+```
 <filter test**>
     @type                 record_indexing
     check_all_key         false
     key_name              baz
 </filter>
-
+```
 In:
 ```json
 {"foo" => "bar", "baz" => [{"a" => 1}, {"a" => 2}, {"b" => 3}],  "daz" => [{"a"=>1}, {"a"=>2}, {"b"=>3}]}
@@ -33,11 +34,11 @@ Out:
 ```json
 {"foo"=>"bar", "baz"=>{"0"=> {"a" => 1} , "1"=>{"a" => 2}, "2"=>{"b"=>3}},  "daz" => [{"a"=>1}, {"a"=>2}, {"b"=>3}]}
 ```
-
+```
 <filter test**>
     @type                 record_indexing
 </filter>
-
+```
 In:
 ```json
 {"foo" => "bar", "baz"=>[{"a"=>1}, {"a"=>2}, {"b"=>3}] , "daz" => [{"a"=>1}, {"a"=>2}, {"b"=>3}]}
