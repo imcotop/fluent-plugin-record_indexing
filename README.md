@@ -4,15 +4,48 @@
 
 ## Examples
 
+<filter test**>
+    @type                 record_indexing
+    check_all_key         false
+    key_name              baz
+    key_prefix            baz_0
+</filter>
+
 In:
 ```json
 {"foo" => "bar", "baz" => [{"a" => 1}, {"a" => 2}, {"b" => 3}]}
 ```
 Out:
 ```json
-{"foo"=>"bar", "baz"=>{"baz_0"=>1, "baz_1"=>1, "baz_2"=>{"b"=>3}}}
+{"foo"=>"bar", "baz"=>{"baz_0"=> {"a" => 1} , "baz_1"=> {"a" => 2}, "baz_2"=>{"b"=>3}}}
+```
+<filter test**>
+    @type                 record_indexing
+    check_all_key         false
+    key_name              baz
+</filter>
+
+In:
+```json
+{"foo" => "bar", "baz" => [{"a" => 1}, {"a" => 2}, {"b" => 3}],  "daz" => [{"a"=>1}, {"a"=>2}, {"b"=>3}]}
+```
+Out:
+```json
+{"foo"=>"bar", "baz"=>{"0"=> {"a" => 1} , "1"=>{"a" => 2}, "2"=>{"b"=>3}},  "daz" => [{"a"=>1}, {"a"=>2}, {"b"=>3}]}
 ```
 
+<filter test**>
+    @type                 record_indexing
+</filter>
+
+In:
+```json
+{"foo" => "bar", "baz"=>[{"a"=>1}, {"a"=>2}, {"b"=>3}] , "daz" => [{"a"=>1}, {"a"=>2}, {"b"=>3}]}
+```
+Out:
+```json
+{"foo"=>"bar", "baz"=>{"0"=>{"a"=>1} , "1"=>{"a"=>2}, "2"=>{"b"=>3}}, "daz"=>{"0"=>{"a"=>1} , "1"=>{"a"=>2}, "2"=>{"b"=>3}}}
+```
 
 ## Installation
 
@@ -38,9 +71,10 @@ $ bundle
 
 ## Configuration
 
-* **key_name** (string) (required): Key name to spin
+* **key_name** (string)
+* **key_prefix** (string)
+* **check_all_key**  (bool) default: true
 
-* See also: [Filter Plugin Overview](https://docs.fluentd.org/v0.14/articles/filter-plugin-overview)
 
 ## Copyright
 
