@@ -39,9 +39,6 @@ $ bundle
 ## Configuration
 
 * **key_name** (string) (required): Key name to spin
-* **reserve_key** (bool) (optional): Keep original key in parsed result.
-* **hash_value_field** (string) (optional): Store parsed values as a hash value in a field in case of value is not an object.
-  * Default value: `data`.
 
 * See also: [Filter Plugin Overview](https://docs.fluentd.org/v0.14/articles/filter-plugin-overview)
 
