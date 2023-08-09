@@ -45,7 +45,7 @@ Out:
 ### RubyGems
 
 ```
-$ gem install fluent-plugin-array-spin
+$ gem install fluent-plugin-record_indexing
 ```
 
 ### Bundler
