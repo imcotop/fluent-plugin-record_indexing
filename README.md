@@ -7,7 +7,7 @@
 <filter test**>
     @type                 record_indexing
     check_all_key         false
-    key_name              baz
+    key_names              baz
     key_prefix            baz_0
 </filter>
 
@@ -20,7 +20,7 @@ Out:
 <filter test**>
     @type                 record_indexing
     check_all_key         false
-    key_name              baz
+    key_names              baz
 </filter>
 
 In:
@@ -43,7 +43,7 @@ Out:
 <filter test**>
     @type                 record_indexing
     check_all_key         false
-    key_name              baz,daz
+    key_names              baz,daz
 </filter>
 
 In:
@@ -87,7 +87,7 @@ $ bundle
 
 ## Configuration
 
-* **key_name** (array) default: []
+* **key_names** (array) default: []
 * **key_prefix** (string) default: nil
 * **exclude_keys** (array) default: [] Use this parameter if you need to keep the value as is without indexing
 * **check_all_key**  (bool) default: true
