@@ -89,7 +89,7 @@ $ bundle
 
 * **key_name** (array) default: []
 * **key_prefix** (string) default: nil
-* **exclude_keys** (array) default: []
+* **exclude_keys** (array) default: [] Use this parameter if you need to keep the value as is without indexing
 * **check_all_key**  (bool) default: true
 
 
