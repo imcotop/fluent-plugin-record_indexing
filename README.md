@@ -39,6 +39,29 @@ In:
 Out:
 {"foo"=>"bar", "baz"=>{"0"=>{"a"=>1} , "1"=>{"a"=>2}, "2"=>{"b"=>3}}, "daz"=>{"0"=>{"a"=>1} , "1"=>{"a"=>2}, "2"=>{"b"=>3}}}
 ```
+```
+<filter test**>
+    @type                 record_indexing
+    check_all_key         false
+    key_name              baz,daz
+</filter>
+
+In:
+{"foo" => "bar", "baz"=>[{"a"=>1}, {"a"=>2}, {"b"=>3}] , "daz" => [{"a"=>1}, {"a"=>2}, {"b"=>3}]}
+Out:
+{"foo"=>"bar", "baz"=>{"0"=>{"a"=>1} , "1"=>{"a"=>2}, "2"=>{"b"=>3}}, "daz"=>{"0"=>{"a"=>1} , "1"=>{"a"=>2}, "2"=>{"b"=>3}}}
+```
+```
+<filter test**>
+    @type                record_indexing
+    exclude_keys         baz
+</filter>
+
+In:
+{"foo" => "bar", "baz"=>[{"a"=>1}, {"a"=>2}, {"b"=>3}] , "daz" => [{"a"=>1}, {"a"=>2}, {"b"=>3}]}
+Out:
+{"foo"=>"bar", "baz"=>[{"a"=>1}, {"a"=>2}, {"b"=>3}], "2"=>{"b"=>3}}, "daz"=>{"0"=>{"a"=>1} , "1"=>{"a"=>2}, "2"=>{"b"=>3}}}
+```
 
 ## Installation
 
@@ -64,8 +87,9 @@ $ bundle
 
 ## Configuration
 
-* **key_name** (string)
-* **key_prefix** (string)
+* **key_name** (array) default: []
+* **key_prefix** (string) default: nil
+* **exclude_keys** (array) default: []
 * **check_all_key**  (bool) default: true
 
 
