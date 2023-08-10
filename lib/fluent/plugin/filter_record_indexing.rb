@@ -1,4 +1,3 @@
-
 require "fluent/filter"
 
 module Fluent
