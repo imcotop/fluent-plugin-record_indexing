@@ -1,6 +1,6 @@
 # fluent-plugin-record_indexing
 
-[Fluentd](https://fluentd.org/) Filter plugin to spin entry with an array field into multiple entries.
+[Fluentd](https://www.fluentd.org) Filter plugin to spin entry with an array field into multiple entries.
 
 ## Examples
 ```
