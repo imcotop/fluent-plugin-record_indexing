@@ -28,9 +28,13 @@ module Fluent
           if exclude_keys.include?(key)
             new_record[key] = value  # Keep the value as is without indexing
           elsif value.is_a?(Array)
-            new_record[key] = {}
-            value.each_with_index do |item, index|
-              new_record[key]["#{key_prefix}#{index}"] = item
+            if value.length == 1
+              new_record[key] = value.first
+            else
+              new_record[key] = {}
+              value.each_with_index do |item, index|
+                new_record[key]["#{key_prefix}#{index}"] = item
+              end
             end
           elsif value.is_a?(Hash)
             new_record[key] = {}
