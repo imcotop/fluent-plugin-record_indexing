@@ -8,13 +8,12 @@ module Fluent
     config_param :key_names, :array, default: []
     config_param :key_prefix, :string, default: nil
     config_param :check_all_key, :bool, default: true
+    config_param :ignore_length, :bool, default: true
     config_param :exclude_keys, :array, default: []
 
     def filter(tag, time, record)
-      if check_all_key == false
-        unless key_names.any?
-          raise ArgumentError, "key_names parameter is required if check_all_key set false"
-        end
+      if !@check_all_key && key_names.empty?
+        raise ArgumentError, "key_names parameter is required if check_all_key set false"
       end
       new_record = {}
       each_with_index(record, new_record)
@@ -23,17 +22,28 @@ module Fluent
     end
 
     def each_with_index(record, new_record)
+      seen_keys = {}  # To keep track of duplicate names
       record.each do |key, value|
-        if check_all_key || key_names.include?(key)
-          if exclude_keys.include?(key)
+        if @check_all_key || @key_names.include?(key)
+          if @exclude_keys.include?(key)
             new_record[key] = value  # Keep the value as is without indexing
           elsif value.is_a?(Array)
-            if value.length == 1
+            if !@ignore_length && value.length == 1
               new_record[key] = value.first
             else
               new_record[key] = {}
               value.each_with_index do |item, index|
-                new_record[key]["#{key_prefix}#{index}"] = item
+                if item.is_a?(Hash) && item.key?("name") && item.key?("value")
+                  item_name = item["name"]
+                  if seen_keys[item_name]
+                    new_record[key]["#{@key_prefix}#{index}"] = item
+                  else
+                    new_record[key][item_name] = item["value"]
+                    seen_keys[item_name] = true
+                  end
+                else
+                  new_record[key]["#{@key_prefix}#{index}"] = item
+                end
               end
             end
           elsif value.is_a?(Hash)

@@ -1,7 +1,7 @@
 # coding: utf-8
 Gem::Specification.new do |spec|
   spec.name          = "fluent-plugin-record_indexing"
-  spec.version       = "0.2.2"
+  spec.version       = "0.2.3"
   spec.authors       = ["imcotop"]
   spec.email         = ["imcotop@icloud.com"]
 
