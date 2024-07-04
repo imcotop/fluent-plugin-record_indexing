@@ -60,7 +60,34 @@ Out:
 In:
 {"foo" => "bar", "baz"=>[{"a"=>1}, {"a"=>2}, {"b"=>3}] , "daz" => [{"a"=>1}, {"a"=>2}, {"b"=>3}]}
 Out:
-{"foo"=>"bar", "baz"=>[{"a"=>1}, {"a"=>2}, {"b"=>3}], "2"=>{"b"=>3}}, "daz"=>{"0"=>{"a"=>1} , "1"=>{"a"=>2}, "2"=>{"b"=>3}}}
+{"foo"=>"bar", "baz"=>[{"a"=>1}, {"a"=>2}, {"b"=>3}], "2"=>{"b"=>3}], "daz"=>{"0"=>{"a"=>1} , "1"=>{"a"=>2}, "2"=>{"b"=>3}}}
+```
+
+```
+<filter test**>
+    @type                record_indexing
+    exclude_keys         baz
+</filter>
+
+In:
+{"foo" => "bar", "baz"=>[{"a"=>1}, {"a"=>2}, {"b"=>3}] , "daz" => [{"name"=>1, "value"=>2}, {"a"=>2}, {"b"=>3}]}
+Out:
+{"foo"=>"bar", "baz"=>[{"a"=>1}, {"a"=>2}, {"b"=>3}], "2"=>{"b"=>3}], "daz"=>{"a"=>2 , "1"=>{"a"=>2}, "2"=>{"b"=>3}}}
+```
+
+```
+ignore_length by default set true
+
+<filter test**>
+    @type                record_indexing
+    ignore_length        false
+    exclude_keys         baz
+</filter>
+
+In:
+{"foo" => "bar", "baz"=>[{"a"=>1}, {"a"=>2}, {"b"=>3}] , "daz" => [{"name"=>1}]}
+Out:
+{"foo"=>"bar", "baz"=>[{"a"=>1}, {"a"=>2}, {"b"=>3}], "2"=>{"b"=>3}], "daz"=>[{"a"=>2}]}
 ```
 
 ## Installation
