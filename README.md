@@ -76,7 +76,6 @@ Out:
 ```
 
 ```
-ignore_length by default set true
 
 <filter test**>
     @type                record_indexing
@@ -118,6 +117,8 @@ $ bundle
 * **key_prefix** (string) default: nil
 * **exclude_keys** (array) default: [] Use this parameter if you need to keep the value as is without indexing
 * **check_all_key**  (bool) default: true
+* **ignore_length**  (bool)  default: true
+
 
 
 ## Copyright
